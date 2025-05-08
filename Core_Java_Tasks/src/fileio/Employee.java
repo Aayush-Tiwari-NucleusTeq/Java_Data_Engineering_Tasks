@@ -49,6 +49,25 @@ public class Employee {
 		this.salary = salary;
 	}
 	
+	public String toCSV() {
+        return empId + "," + name + "," + department + "," + salary;
+    }
+	
+	public static Employee fromCSV(String line) {
+        String[] tokens = line.split(",");
+        return new Employee(
+            Integer.parseInt(tokens[0].trim()),
+            tokens[1].trim(),
+            tokens[2].trim(),
+            tokens[3].trim()
+        );
+    }
+
+	@Override
+	public String toString() {
+		return "Employee [empId=" + empId + ", name=" + name + ", department=" + department + ", salary=" + salary
+				+ "]";
+	}
 	
 	
 }
