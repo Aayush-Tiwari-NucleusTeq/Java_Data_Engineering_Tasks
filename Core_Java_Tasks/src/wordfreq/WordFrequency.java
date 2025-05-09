@@ -13,7 +13,7 @@ interface WordCounter {
 public class WordFrequency {
 
     public static void main(String[] args) {
-        String filePath = "data.txt"; 
+        String filePath = "J:\\Java_Data_Engineering_Training\\Java_Data_Engineering_Tasks\\Core_Java_Tasks\\src\\wordfreq\\demofile.txt"; 
         int topN = 5;
 
         try {
@@ -22,11 +22,13 @@ public class WordFrequency {
                     .map(String::toLowerCase)
                     .filter(word -> !word.isEmpty())
                     .collect(Collectors.toList());
+            
+            System.out.println("Words list is " + words);
 
             WordCounter wordCounter = (wordList) -> {
                 Map<String, Long> countMap = new HashMap<>();
                 for (String word : wordList) {
-                    if (word.length() > 2) { 
+                    if (word.length() > 1) { 
                         countMap.put(word, countMap.getOrDefault(word, 0L) + 1);
                     }
                 }

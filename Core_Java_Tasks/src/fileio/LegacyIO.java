@@ -24,7 +24,6 @@ public class LegacyIO implements IReadWriteFunctions {
         } catch (IOException e) {
             e.printStackTrace();
         }
-//        return employees.stream().filter(emp-> emp.getDepartment() == "HR").collect(Collectors.toList());
         return employees;
 	}
 	
