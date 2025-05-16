@@ -9,7 +9,8 @@ public interface EmployeeService {
 
 	EmployeeOutDTO createEmployee(EmployeeInDTO employeeInDTO);
     EmployeeOutDTO getEmployeeById(int empId);
+    EmployeeOutDTO getEmployeeByEmail(String email);
     List<EmployeeOutDTO> getAllEmployees();
     EmployeeOutDTO updateEmployee(int empId, EmployeeInDTO employeeInDTO);
-    void deleteEmployee(int empId);
+    void deleteEmployee(String email);
 }
