@@ -27,13 +27,13 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 	
-	@ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponse> handleInternalServerError(Exception ex, WebRequest request) {
-        ErrorResponse error = new ErrorResponse(
-                "Internal server error",
-                HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                request.getDescription(false)
-        );
-        return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+//	@ExceptionHandler(Exception.class)
+//    public ResponseEntity<ErrorResponse> handleInternalServerError(Exception ex, WebRequest request) {
+//        ErrorResponse error = new ErrorResponse(
+//                "Internal server error",
+//                HttpStatus.INTERNAL_SERVER_ERROR.value(),
+//                request.getDescription(false)
+//        );
+//        return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+//    }
 }
