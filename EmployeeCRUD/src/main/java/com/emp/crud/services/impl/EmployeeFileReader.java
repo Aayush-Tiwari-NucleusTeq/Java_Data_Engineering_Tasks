@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.emp.crud.entities.Employee;
@@ -14,9 +15,6 @@ import com.emp.crud.repository.EmployeeRepository;
 
 @Service
 public class EmployeeFileReader {
-
-    @Autowired
-    private EmployeeRepository employeeRepository;
 
     public List<Employee> importFromCSV(String filePath) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
@@ -31,7 +29,6 @@ public class EmployeeFileReader {
                 emp.setEmail(data[2]);
                 emp.setSalary(Double.parseDouble(data[3]));
                 emps.add(emp);
-//                employeeRepository.save(emp);
             }
             return emps;
         } catch (IOException e) {
@@ -39,4 +36,5 @@ public class EmployeeFileReader {
         }
 		return null;
     }
+    
 }

@@ -11,7 +11,6 @@ import lombok.Setter;
 @Setter
 public class EmployeeOutDTO {
 
-	private int empId;
     private String name;
     private String department;
     private String email;
