@@ -95,7 +95,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     /**
      * Updates an existing employee.
      *
-     * @param empId Employee ID.
+     * @param email Employee email.
      * @param employeeInDTO Updated data.
      * @return Updated EmployeeOutDTO.
      */

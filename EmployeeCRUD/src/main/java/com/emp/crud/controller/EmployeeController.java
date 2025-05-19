@@ -123,7 +123,7 @@ public class EmployeeController {
     /**
      * Updates an existing employee.
      *
-     * @param id Employee ID.
+     * @param id Employee email.
      * @param employeeInDTO Updated employee data.
      * @return Updated employee details.
      */
