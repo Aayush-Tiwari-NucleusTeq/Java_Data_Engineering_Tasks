@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.emp.crud.dto.in.EmployeeInDTO;
 import com.emp.crud.dto.out.EmployeeOutDTO;
+import com.emp.crud.utils.UpdateRequest;
 
 public interface EmployeeService {
 
@@ -11,6 +12,6 @@ public interface EmployeeService {
     EmployeeOutDTO getEmployeeById(int empId);
     EmployeeOutDTO getEmployeeByEmail(String email);
     List<EmployeeOutDTO> getAllEmployees();
-    EmployeeOutDTO updateEmployee(int empId, EmployeeInDTO employeeInDTO);
+    EmployeeOutDTO updateEmployee(String email, UpdateRequest employee);
     void deleteEmployee(String email);
 }

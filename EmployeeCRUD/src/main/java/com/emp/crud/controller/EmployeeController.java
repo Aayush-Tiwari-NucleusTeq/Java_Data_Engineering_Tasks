@@ -23,6 +23,7 @@ import com.emp.crud.entities.Employee;
 import com.emp.crud.services.EmployeeService;
 import com.emp.crud.services.impl.EmployeeFileReader;
 import com.emp.crud.services.impl.EmployeeFileWriter;
+import com.emp.crud.utils.UpdateRequest;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -126,12 +127,12 @@ public class EmployeeController {
      * @param employeeInDTO Updated employee data.
      * @return Updated employee details.
      */
-    @PutMapping("/{id}")
+    @PutMapping("/{email}")
     public ResponseEntity<EmployeeOutDTO> updateEmployee(
-            @PathVariable int id,
-            @Valid @RequestBody EmployeeInDTO employeeInDTO) {
-        log.info("Updating employee with ID: {}", id);
-        EmployeeOutDTO updatedEmployee = employeeService.updateEmployee(id, employeeInDTO);
+            @PathVariable String email,
+            @RequestBody UpdateRequest employee) {
+        log.info("Updating employee with email: {}", email);
+        EmployeeOutDTO updatedEmployee = employeeService.updateEmployee(email, employee);
         return ResponseEntity.ok(updatedEmployee);
     }
 

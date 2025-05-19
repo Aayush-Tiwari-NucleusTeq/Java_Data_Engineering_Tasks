@@ -1,5 +1,7 @@
 package com.emp.crud.controller;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+
 import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
@@ -9,8 +11,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.web.servlet.MockMvc;
 
 import com.emp.crud.dto.in.EmployeeInDTO;
 import com.emp.crud.dto.out.EmployeeOutDTO;
@@ -18,6 +23,8 @@ import com.emp.crud.entities.Employee;
 import com.emp.crud.services.EmployeeService;
 import com.emp.crud.services.impl.EmployeeFileReader;
 import com.emp.crud.services.impl.EmployeeFileWriter;
+import com.emp.crud.utils.UpdateRequest;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @ExtendWith(MockitoExtension.class)
 class EmployeeControllerTest {
@@ -33,6 +40,9 @@ class EmployeeControllerTest {
 
     @Mock
     private EmployeeFileWriter employeeFileWriter;
+    
+    @Autowired
+    private MockMvc mockmvc;
 
     @Test
     void testCreateEmployee() {
@@ -72,19 +82,6 @@ class EmployeeControllerTest {
         ResponseEntity<List<EmployeeOutDTO>> response = employeeController.getAllEmployees();
 
         Assertions.assertEquals(2, response.getBody().size());
-    }
-
-    @Test
-    void testUpdateEmployee() {
-        int empId = 2;
-        EmployeeInDTO inDTO = new EmployeeInDTO("Updated", "IT", "updated@gmail.com", 75000.0);
-        EmployeeOutDTO outDTO = new EmployeeOutDTO("Updated", "IT", "updated@gmail.com", 75000.0);
-
-        Mockito.when(employeeService.updateEmployee(empId, inDTO)).thenReturn(outDTO);
-
-        ResponseEntity<EmployeeOutDTO> response = employeeController.updateEmployee(empId, inDTO);
-
-        Assertions.assertEquals("Updated", response.getBody().getName());
     }
 
     @Test

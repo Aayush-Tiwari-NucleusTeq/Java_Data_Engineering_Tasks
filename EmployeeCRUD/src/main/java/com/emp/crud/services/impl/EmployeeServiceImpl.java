@@ -13,6 +13,7 @@ import com.emp.crud.entities.Employee;
 import com.emp.crud.exception.ResourceNotFoundException;
 import com.emp.crud.repository.EmployeeRepository;
 import com.emp.crud.services.EmployeeService;
+import com.emp.crud.utils.UpdateRequest;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -99,20 +100,19 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @return Updated EmployeeOutDTO.
      */
     @Override
-    public EmployeeOutDTO updateEmployee(int empId, EmployeeInDTO employeeInDTO) {
-        log.info("Updating employee with ID: {}", empId);
-        Employee existingEmployee = employeeRepository.findById(empId)
+    public EmployeeOutDTO updateEmployee(String email, UpdateRequest employeeInDTO) {
+        log.info("Updating employee with email: {}", email);
+        Employee existingEmployee = employeeRepository.findByEmail(email)
             .orElseThrow(() -> {
-                log.error("Employee not found with ID: {}", empId);
-                return new ResourceNotFoundException("Employee not found with id: " + empId);
+                log.error("Employee not found with ID: {}", email);
+                return new ResourceNotFoundException("Employee not found with email: " + email);
             });
-        existingEmployee.setName(employeeInDTO.getName());
-        existingEmployee.setDepartment(employeeInDTO.getDepartment());
-        existingEmployee.setEmail(employeeInDTO.getEmail());
-        existingEmployee.setSalary(employeeInDTO.getSalary());
+        existingEmployee.setName(employeeInDTO.getName() != null ? employeeInDTO.getName() : existingEmployee.getName());
+        existingEmployee.setDepartment(employeeInDTO.getDepartment() != null ? employeeInDTO.getDepartment() : existingEmployee.getDepartment());
+        existingEmployee.setSalary(employeeInDTO.getSalary() != null ? employeeInDTO.getSalary() : existingEmployee.getSalary());
 
         Employee updatedEmployee = employeeRepository.save(existingEmployee);
-        log.info("Employee updated successfully with ID: {}", empId);
+        log.info("Employee updated successfully with email: {}", email);
         return employeeToEmployeeOutDTO(updatedEmployee);
     }
 
