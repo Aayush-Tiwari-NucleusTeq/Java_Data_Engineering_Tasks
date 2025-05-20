@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.employee.service.entities.Email;
 import com.employee.service.entities.Employee;
 import com.employee.service.services.EmployeeService;
+import com.employee.service.services.KafkaProducerService;
 
 @RestController
 @RequestMapping("/employee")
@@ -24,6 +25,15 @@ public class EmployeeController {
 
 	@Autowired
 	private EmployeeService employeeService;
+	
+	@Autowired
+    private KafkaProducerService kafkaProducerService;
+
+    @PostMapping("/kafka")
+    public ResponseEntity<String> sendEmployee(@RequestBody Employee employee) {
+        kafkaProducerService.sendEmployeeEvent(employee);
+        return ResponseEntity.ok("Employee event sent!");
+    }
 
 	@GetMapping
 	public ResponseEntity<List<Employee>> getAllEmployees() {
