@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.employee.service.entities.Email;
 import com.employee.service.entities.Employee;
 import com.employee.service.services.EmployeeService;
 
@@ -58,4 +59,16 @@ public class EmployeeController {
 	public ResponseEntity<?> getEmployeeWithMetaData(@PathVariable int id) {
 		return ResponseEntity.ok(employeeService.getEmployeeWithEmail(id));
 	}
+	
+	@GetMapping("/email/webClient/{employeeId}")
+    public ResponseEntity<Email> getEmailViaWebClient(@PathVariable int employeeId) {
+        Email email = employeeService.getEmailwithEmailWebClient(employeeId);
+        return ResponseEntity.ok(email);
+    }
+	
+	@GetMapping("/email/resttemplate/{employeeId}")
+    public ResponseEntity<Email> getEmailViaRestTemplate(@PathVariable int employeeId) {
+        Email email = employeeService.getEmailByEmployeeId(employeeId);
+        return ResponseEntity.ok(email);
+    }
 }

@@ -7,6 +7,8 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import com.employee.service.entities.Email;
 import com.employee.service.entities.Employee;
@@ -17,6 +19,12 @@ public class EmployeeService {
 	
 	@Autowired
 	private EmailClient emailClient;
+	
+	@Autowired
+	private WebClient webClient;
+	
+	@Autowired
+	private RestTemplate restTemplate;
 
 	@Autowired
     private EmployeeRepository employeeRepository;
@@ -57,5 +65,18 @@ public class EmployeeService {
         response.put("employee", emp);
         response.put("email", email);
         return response;
+    }
+    
+    public Email getEmailwithEmailWebClient(int employeeId) {
+        return webClient.get()
+                .uri("/email/by-employee/{employeeId}", employeeId)
+                .retrieve()
+                .bodyToMono(Email.class)
+                .block();
+    }
+    
+    public Email getEmailByEmployeeId(int employeeId) {
+        String url = "http://localhost:8082/email/by-employee/{employeeId}";
+        return restTemplate.getForObject(url, Email.class, employeeId);
     }
 }
