@@ -28,7 +28,7 @@ public class KafkaConsumerConfig {
 	    return new DefaultKafkaConsumerFactory<>(
 	        props,
 	        new StringDeserializer(),
-	        new JsonDeserializer<>(Employee.class, false) // 'false' disables headers usage
+	        new JsonDeserializer<>(Employee.class, false)
 	    );
 	}
 
