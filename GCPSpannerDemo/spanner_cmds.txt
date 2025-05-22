@@ -1,0 +1,6 @@
+docker run -d -p 9099:9099 gcr.io/cloud-spanner-emulator/emulator:latest
+gcloud config configurations activate emulator
+gcloud config set auth/disable_credentials true
+gcloud config set project test-project
+gcloud config set api_endpoint_overrides/spanner http://localhost:9010/
+gcloud spanner instances create test-instance --config=emulator-config --description="Test instance" --nodes=1
